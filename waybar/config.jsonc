@@ -7,16 +7,17 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
-        "sway/workspaces",
-        "sway/mode",
-        "sway/scratchpad",
+        "hyprland/workspaces",
+        "hyprland/mode",
+        "hyprland/scratchpad",
         "custom/media"
     ],
     "modules-center": [
-        "sway/window"
+        "hyprland/window"
     ],
     "modules-right": [
         "mpd",
+        "custom/btop",
         "idle_inhibitor",
         "pulseaudio",
         "network",
@@ -34,7 +35,7 @@
         "custom/power"
     ],
     // Modules configuration
-    "sway/workspaces": {
+    "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "warp-on-scroll": false,
@@ -42,12 +43,19 @@
         "format-icons": {
             "1": "",
             "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
+            // "3": "",
+            // "4": "",
+            // "5": "",
             "urgent": "",
             "focused": "",
             "default": ""
+        },
+        "persistent-workspaces": {
+            "1": "1: Terminal",
+            "2": "2: Web",
+            "3": "3: Code",
+            "4": "4: Media",
+            "5": "5: Chat"
         }
     },
     "keyboard-state": {
@@ -59,10 +67,10 @@
             "unlocked": ""
         }
     },
-    "sway/mode": {
+    "hyprland/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "sway/scratchpad": {
+    "hyprland/scratchpad": {
         "format": "{icon} {count}",
         "show-empty": false,
         "format-icons": ["", ""],
@@ -191,6 +199,11 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
+    },
+    "custom/btop": {
+        "format": "📊 Btop",
+        "on-click": "wezterm start -- btop",
+        "tooltip": false
     },
     "custom/media": {
         "format": "{icon} {text}",
