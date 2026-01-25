@@ -4,8 +4,8 @@ local wezterm = require("wezterm")
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
-config.font = wezterm.font("CaskaydiaCove Nerd Font Mono")
-config.font_size = 10
+config.font = wezterm.font("Hack Nerd Font Mono")
+config.font_size = 9
 
 config.enable_tab_bar = false
 config.window_decorations = "NONE"
