@@ -43,11 +43,13 @@
         "format-icons": {
             "1": "",
             "2": "",
+            "3": "",
+            "4": "",
             // "3": "",
             // "4": "",
-            // "5": "",
             "urgent": "",
             "focused": "",
+            "active": "",
             "default": ""
         },
         "persistent-workspaces": {
@@ -106,8 +108,10 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "☕",
+            "deactivated": "🌙"
+            // "activated": "",
+            // "deactivated": ""
         }
     },
     "tray": {
