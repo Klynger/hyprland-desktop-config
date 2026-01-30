@@ -1,0 +1,6 @@
+hypridle
+swaync
+waybar
+hyprshot
+impala
+paru xdg-terminal-exec

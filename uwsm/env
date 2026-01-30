@@ -1,0 +1,4 @@
+# Changes require a restart to take effect.
+
+# Set default terminal and editor
+source ~/.config/uwsm/default
