@@ -1,0 +1,7 @@
+@define-color base rgba(40, 40, 40, 0.85);
+@define-color base-selected rgba(254, 128, 25, 0.4);
+@define-color border-color #fe8019;
+@define-color text-color #ebdbb2;
+@define-color input-bg rgba(60, 56, 54, 0.8);
+@define-color input-border rgba(254, 128, 25, 0.5);
+@define-color selection-shadow rgba(254, 128, 25, 0.3);

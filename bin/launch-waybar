@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# It kills any existing waybar processes and then starts a new one.
+
+pkill -x waybar
+uwsm-app -- waybar >/dev/null 2>&1 &

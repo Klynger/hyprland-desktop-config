@@ -4,3 +4,4 @@ waybar
 hyprshot
 impala
 paru xdg-terminal-exec
+getnf (Nerd Font manager)
