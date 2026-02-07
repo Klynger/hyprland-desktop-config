@@ -10,10 +10,9 @@ config.font_size = 9
 config.enable_tab_bar = false
 config.window_decorations = "NONE"
 
-config.color_scheme = "Catppuccin Frappé (Gogh)"
+config.color_scheme = 'Tokyo Night Storm'
 
-config.window_background_opacity = 1
-config.macos_window_background_blur = 1
+config.window_background_opacity = 0.9
 config.default_prog = {
 	"zsh",
 	"-lc",

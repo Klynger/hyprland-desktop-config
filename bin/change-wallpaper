@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Changes the wallpaper using swww
+
+WALLPAPERS_DIR="$HOME/Pictures/Wallpapers/current"
+LAST_WALLPAPER_FILE="$HOME/.cache/last_wallpaper"
+
+# Check if wallpaper directory exists
+if [[ ! -d "$WALLPAPERS_DIR" ]]; then
+  notify-send "Wallpaper directory does not exist: $WALLPAPERS_DIR" -u critical -t 3000
+  exit 1
+fi
+
+# Check if there are any wallpaper files
+if [[ $(find "$WALLPAPERS_DIR" -type f | wc -l) -eq 0 ]]; then
+  notify-send "No wallpaper files found in $WALLPAPERS_DIR" -u critical -t 3000
+  exit 1
+fi
+
+# Get current wallpaper
+LAST_WALLPAPER=""
+if [[ -f "$LAST_WALLPAPER_FILE" ]]; then
+  LAST_WALLPAPER=$(cat "$LAST_WALLPAPER_FILE")
+fi
+
+# Find all wallpapers except the last one
+mapfile -t  WALLPAPERS < <(find "$WALLPAPERS_DIR" -type f ! -path "$LAST_WALLPAPER")
+
+if [[ ${#WALLPAPERS[@]} -eq 0 ]]; then
+  # Fallback if only one wallpaper exists
+  WALLPAPER=$(find "$WALLPAPERS_DIR" -type -f | head -n 1)
+else
+  WALLPAPER=$(printf '%s\n' "${WALLPAPERS[@]}" | shuf -n 1)
+fi
+
+mkdir -p "$(dirname "$LAST_WALLPAPER_FILE")"
+echo "$WALLPAPER" > "$LAST_WALLPAPER_FILE"
+
+swww img "$WALLPAPER" --transition-fps 240 --transition-type random --transition-duration 2

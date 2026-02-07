@@ -1,7 +1,8 @@
 hypridle
 swaync
 waybar
-hyprshot
-impala
-paru xdg-terminal-exec
-getnf (Nerd Font manager)
+hyprshot (https://github.com/Gustash/Hyprshot)
+impala (https://github.com/pythops/impala)
+paru xdg-terminal-exec (https://github.com/Vladimir-csp/xdg-terminal-exec)
+getnf (Get Nerd Fonts https://github.com/getnf/getnf)
+swww (https://codeberg.org/LGFae/awww)
