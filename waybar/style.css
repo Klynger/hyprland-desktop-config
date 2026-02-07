@@ -1,0 +1,87 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(0, 0, 0, 0);
+}
+
+tooltip {
+  background: rgba(43, 48, 59, 0.5);
+  border: 1px solid rgba(100, 114, 125, 0.5);
+}
+tooltip label {
+  color: white;
+}
+
+.modules-left {
+  border-bottom-right-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding-right: 8px;
+}
+
+.modules-right {
+    color: white;
+    border-bottom-left-radius: 10px;
+    padding-left: 12px;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#custom-btop,
+#pulseaudio,
+#memory,
+#cpu,
+#temperature,
+#custom-notification,
+#clock,
+#custom-power {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+#custom-btop,
+#pulseaudio,
+#memory,
+#custom-notification,
+#clock {
+    margin-right: 12px;
+    border-bottom-right-radius: 20px;
+    padding-right: 10px;
+}
+
+#custom-btop,
+#pulseaudio,
+#temperature,
+#custom-notification,
+#clock,
+#custom-power {
+    padding-left: 10px;
+    border-bottom-left-radius: 20px;
+}
+
+
+
+#cpu {
+    padding-right: 4px;
+    padding-left: 4px;
+}
+
+#memory {
+    padding-left: 4px;
+}
+
+#workspaces button {
+    padding: 0 10px;
+    background: transparent;
+    color: white;
+    border-bottom: 3px solid transparent;
+}
+
+#workspaces button.focused {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
