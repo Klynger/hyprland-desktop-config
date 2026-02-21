@@ -1,55 +1,85 @@
-@import "/home/klynger/dev/hyprland-desktop-config/wofi/themes/solarized-dark.css";
+@import "/home/klynger/dev/hyprland-desktop-config/wofi/themes/matugen.css";
+
+/*
+ * Reset every widget in the tree.
+ * Wofi loads the GTK theme first (gtk_dark=true), which paints backgrounds
+ * on scrolledwindow, viewport, flowbox, flowboxchild, etc.
+ */
+*,
+window,
+window box,
+window box entry,
+window box scrolledwindow,
+window box scrolledwindow viewport,
+window box scrolledwindow viewport box,
+window box scrolledwindow viewport box flowbox,
+window box scrolledwindow viewport box flowbox flowboxchild {
+  background-image: none;
+  background-color: transparent;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  min-height: 0;
+  min-width: 0;
+}
 
 * {
   font-family: 'CaskaydiaCove Nerd Font', monospace;
   font-size: 16px;
-  color: @text-color;
 }
 
-/* Window */
+/*
+ * Window with Material You border matching the primary accent color.
+ * Uses a 2px solid border with the primary color from matugen.
+ */
 window {
-  padding: 20px;
-  margin: 0px;
-  border: 2px solid @border-color;
-  border-radius: 10px;
-  background: @base;
+  margin: 0;
+  padding: 0;
+  background-color: @surface-container-low;
 }
 
+#outer-box {
+  padding: 8px;
+}
+
+/* Search input */
 #input {
-  margin: 2px 2px 0 2px;
-  border-radius: 8px 8px 0 0;
-  border-bottom: 1px solid @input-border;
-  padding: 4px 12px;
-  background: @input-bg;
+  margin: 4px 4px 4px 4px;
+  border-radius: 24px;
+  padding: 10px 16px;
+  background-color: @surface-container-highest;
+  color: @on-surface;
 }
 
+/* List area */
 #inner-box {
-  padding-top: 8px;
-  padding-right: 4px;
-  padding-left: 4px;
-  padding-bottom: 8px;
+  padding: 4px 0;
 }
 
+/* List items */
 #entry {
-  border-radius: 8px;
-  margin: 0px 2px;
-  padding: 8px 16px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
+  border-radius: 24px;
+  margin: 2px 4px;
+  padding: 10px 16px;
+  color: @on-surface;
 }
 
 #entry:selected {
-  outline: none;
-  background-color: @base-selected;
-  border-color: @border-color;
-  box-shadow: 0 0 10px @selection-shadow;
+  background-color: @primary-container;
 }
 
+#entry:selected #text {
+  color: @on-primary-container;
+}
+
+/* Scrollbar */
 #scroll {
-  padding-right: 2px;
+  padding-right: 4px;
 }
 
+/* Text */
 #text {
-  margin-left: 8px;
+  margin-left: 12px;
+  color: @on-surface;
 }

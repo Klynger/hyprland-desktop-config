@@ -11,3 +11,5 @@ mpv (media player https://mpv.io/)
 Matugen (https://github.com/InioX/matugen)
 adw-gtk-theme (https://github.com/lassekongo83/adw-gtk3)
 bibata-cursor-theme (https://github.com/ful1e5/bibata)
+Flathub
+adw-steam-gtk (https://github.com/Foldex/AdwSteamGtk)

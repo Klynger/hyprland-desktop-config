@@ -10,7 +10,7 @@ config.font_size = 9
 config.enable_tab_bar = false
 config.window_decorations = "NONE"
 
-config.color_scheme = 'Tokyo Night Storm'
+config.color_scheme = 'matugen-theme'
 
 config.window_background_opacity = 0.9
 config.default_prog = {

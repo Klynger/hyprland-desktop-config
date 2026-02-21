@@ -2,7 +2,7 @@
 
 # btop
 [templates.btop]
-input_path = '~/.config/matugen/templates/matugen-btop.theme'
+input_path = '~/.config/matugen/templates/btop.theme'
 output_path = '~/.config/btop/themes/matugen.theme'
 post_hook =   'pkill -USR2 btop || true'
 
@@ -17,11 +17,28 @@ post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings s
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
 
+# steam
+[templates.steam]
+input_path = '~/.config/matugen/templates/steam.css'
+output_path = '~/.config/AdwSteamGtk/custom.css'
+post_hook =  'flatpak run io.github.Foldex.AdwSteamGtk -i'
+
 # swaync 
 [templates.swaync]
-input_path = '~/.config/matugen/templates/matugen-swaync.css'
+input_path = '~/.config/matugen/templates/swaync.css'
 output_path = '~/.config/swaync/matugen/matugen-swaync.css'
 post_hook = 'swaync-client -rs'
+
+# wezterm
+[templates.wezterm]
+input_path = '~/.config/matugen/templates/wezterm.toml'
+output_path = '~/.config/wezterm/colors/matugen-theme.toml'
+post_hook = 'touch ~/.config/wezterm/wezterm.lua'
+
+# wofi
+[templates.wofi]
+input_path = '~/.config/matugen/templates/wofi.css'
+output_path = '~/.config/wofi/themes/matugen.css'
 
 [config.custom_colors.red]
 color = "#FF0000"

@@ -1,0 +1,37 @@
+/*
+ * Wofi Material You Theme
+ * Generated with Matugen
+ * Material You color palette following Material Design 3 guidelines
+ */
+
+/* Surface colors - Material You layering system */
+@define-color surface {{colors.surface.default.hex}};
+@define-color surface-dim {{colors.surface_dim.default.hex}};
+@define-color surface-bright {{colors.surface_bright.default.hex}};
+@define-color surface-container {{colors.surface_container.default.hex}};
+@define-color surface-container-low {{colors.surface_container_low.default.hex}};
+@define-color surface-container-high {{colors.surface_container_high.default.hex}};
+@define-color surface-container-highest {{colors.surface_container_highest.default.hex}};
+
+/* Primary colors - main accent */
+@define-color primary {{colors.primary.default.hex}};
+@define-color on-primary {{colors.on_primary.default.hex}};
+@define-color primary-container {{colors.primary_container.default.hex}};
+@define-color on-primary-container {{colors.on_primary_container.default.hex}};
+
+/* Surface text colors */
+@define-color on-surface {{colors.on_surface.default.hex}};
+@define-color on-surface-variant {{colors.on_surface_variant.default.hex}};
+
+/* Outline colors */
+@define-color outline {{colors.outline.default.hex}};
+@define-color outline-variant {{colors.outline_variant.default.hex}};
+
+/* Application-specific color mappings */
+@define-color base @surface-container-low;
+@define-color base-selected @primary-container;
+@define-color border-color @primary;
+@define-color text-color @on-surface;
+@define-color text-color-secondary @on-surface-variant;
+@define-color input-bg @surface-container-highest;
+@define-color input-border @outline-variant;
