@@ -25,4 +25,8 @@ config.default_prog = {
   ]],
 }
 
+-- Enable compose key support for cedilla
+config.use_ime = true
+config.use_dead_keys = true
+
 return config
