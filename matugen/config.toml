@@ -6,6 +6,12 @@ input_path = '~/.config/matugen/templates/matugen-btop.theme'
 output_path = '~/.config/btop/themes/matugen.theme'
 post_hook =   'pkill -USR2 btop || true'
 
+# swaync 
+[templates.swaync]
+input_path = '~/.config/matugen/templates/matugen-swaync.css'
+output_path = '~/.config/swaync/matugen/matugen-swaync.css'
+post_hook = 'swaync-client -rs'
+
 [config.custom_colors.red]
 color = "#FF0000"
 blend = true
