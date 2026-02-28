@@ -192,7 +192,6 @@
     "custom/power": {
         "format" : " ⏻ ",
         "tooltip": false,
-        "on-click": "$HOME/.config/waybar/scripts/power_menu.sh",
-        "menu": "on-click"
+        "on-click": "$HOME/.config/waybar/scripts/power_menu.sh"
     }
 }

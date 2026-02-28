@@ -17,12 +17,6 @@ post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings s
 input_path = '~/.config/matugen/templates/gtk-colors.css'
 output_path = '~/.config/gtk-4.0/colors.css'
 
-# steam
-[templates.steam]
-input_path = '~/.config/matugen/templates/steam.css'
-output_path = '~/.config/AdwSteamGtk/custom.css'
-post_hook =  'flatpak run io.github.Foldex.AdwSteamGtk -i'
-
 # swaync 
 [templates.swaync]
 input_path = '~/.config/matugen/templates/swaync.css'
