@@ -17,7 +17,7 @@
         "orientation": "horizontal",
         "modules": [
             "image#media-art",
-            "mpris"
+            "custom/media-or-window"
         ]
     },
     "modules-right": [
@@ -40,7 +40,8 @@
     "image#media-art": {
         "exec": "$HOME/.config/waybar/scripts/media-art.sh",
         "size": 24,
-        "interval": 5,
+        "interval": 3600,
+        "signal": 8,
         "on-click": "quick-panel"
     },
     "hyprland/workspaces": {
@@ -119,28 +120,12 @@
         "scroll-step": 1,
         "on-click": "pavucontrol"
     },
-    "mpris": {
-        "format": "{player_icon} {dynamic}",
-        "format-paused": "{status_icon} {dynamic}",
-        "format-stopped": "",
-        "dynamic-order": ["title", "artist"],
-        "max-length": 40,
-        "player-icons": {
-            "chromium": "",
-            "firefox": "",
-            "mpv": "󰐹",
-            "spotify": "󰎆",
-            "default": ""
-        },
-        "status-icons": {
-            "paused": "",
-            "playing": "",
-            "stopped": ""
-        },
+    "custom/media-or-window": {
+        "exec": "$HOME/.config/waybar/scripts/media-or-window.py",
+        "return-type": "json",
         "on-click": "quick-panel",
         "on-click-middle": "playerctl play-pause",
-        "on-click-right": "playerctl next",
-        "tooltip-format": "{title}\n{artist}\n{album}"
+        "on-click-right": "playerctl next"
     },
     "custom/notification": {
         "tooltip": true,

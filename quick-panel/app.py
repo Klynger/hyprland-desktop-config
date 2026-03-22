@@ -205,7 +205,6 @@ class QuickPanel(Gtk.Application):
 
         self._is_playing = info["status"] == "Playing"
         self._current_art_path = info["art_path"]
-
         # Media card
         card = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=16)
         card.add_css_class("media-card")
