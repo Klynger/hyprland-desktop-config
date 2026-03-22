@@ -48,7 +48,7 @@ echo "$WALLPAPER" > "$LAST_WALLPAPER_FILE"
 swww img "$WALLPAPER" --transition-fps 240 --transition-type random --transition-duration 2
 
 # Regenerate theme colors from wallpaper and reload apps
-# matugen post_hooks handle: btop, gtk, swaync, wezterm, wofi, hyprland
+# matugen post_hooks handle: btop, gtk, swaync, wezterm, rofi, hyprland
 matugen image "$WALLPAPER" -c "$HOME/.config/matugen/config.toml" --source-color-index 0
 
 # Reload waybar CSS

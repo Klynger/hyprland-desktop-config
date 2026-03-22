@@ -63,9 +63,7 @@ shfmt -i 4 -w bin/*
 
 ### Theming pipeline
 
-`matugen/config.toml` is the theming hub. Running `matugen` generates color outputs for btop, GTK 3/4, swaync, wezterm, and wofi using Handlebars templates (`{{colors.color_name.variant.hex}}`). Post-hooks apply changes live.
-
-Wofi themes in `wofi/themes/*.css` are standalone CSS overrides; the active one must be referenced in `wofi/style.css`.
+`matugen/config.toml` is the theming hub. Running `matugen` generates color outputs for btop, GTK 3/4, swaync, wezterm, rofi, and waybar using Handlebars templates (`{{colors.color_name.variant.hex}}`). Post-hooks apply changes live.
 
 ### bin/ scripts
 
