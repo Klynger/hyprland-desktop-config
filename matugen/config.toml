@@ -38,7 +38,7 @@ post_hook = 'hyprctl reload'
 # waybar
 [templates.waybar]
 input_path = '~/.config/matugen/templates/waybar.css'
-output_path = '~/.config/waybar/style.css'
+output_path = '~/.config/waybar/matugen/colors.css'
 
 # rofi
 [templates.rofi]

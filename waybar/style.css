@@ -1,0 +1,141 @@
+@import url("./matugen/colors.css");
+
+/*----------Global Reset-----------------*/
+* {
+    border: none;
+    border-radius: 0px;
+    font-family: "JetBrainsMono Nerd Font Propo", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    min-height: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+/*----------Waybar Container-------------*/
+window#waybar {
+    background-color: transparent;
+    padding: 6px;
+    border-radius: 14px;
+}
+
+/*----------Tooltip----------------------*/
+tooltip {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 24px;
+}
+
+tooltip label {
+    padding: 6px;
+}
+
+/*----------Workspaces-------------------*/
+#workspaces {
+    padding: 4px 6px;
+    margin: 0 0 0 8px;
+    border-radius: 24px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+#workspaces button {
+    padding: 0px 4px;
+    margin: 0px 3px;
+    border-radius: 16px;
+    transition: all 150ms ease-in-out;
+}
+
+#workspaces button.active {
+    min-width: 30px;
+    transition: all 150ms ease-in-out;
+}
+
+#workspaces button:hover {
+    border-radius: 16px;
+    min-width: 30px;
+}
+
+#workspaces button.urgent {
+    border-radius: 16px;
+    transition: all 150ms ease-in-out;
+}
+
+/*----------Module Containers------------*/
+#pulseaudio,
+#network,
+#custom-notification,
+#clock,
+#custom-power,
+#hardware {
+    padding: 0 12px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 24px;
+}
+
+/*----------Clock------------------------*/
+#clock {
+    margin: 0 0 0 8px;
+}
+
+/*----------Pulseaudio-------------------*/
+#pulseaudio {
+    margin: 0 0 0 8px;
+}
+
+/*----------Hardware Group---------------*/
+#hardware {
+    padding: 0 12px;
+    margin: 0 0 0 8px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 24px;
+}
+
+#temperature,
+#cpu,
+#memory {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 4px;
+}
+
+/*----------Network----------------------*/
+#network {
+    margin: 0 0 0 8px;
+}
+
+/*----------Media Group------------------*/
+#media {
+    padding: 0 12px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 24px;
+}
+
+#image-media-art {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 8px 0 0;
+    border-radius: 4px;
+}
+
+#custom-media-or-window {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+/*----------Notification-----------------*/
+#custom-notification {
+    margin: 0 0 0 8px;
+}
+
+/*----------Power------------------------*/
+#custom-power {
+    margin: 0 12px 0 8px;
+}
