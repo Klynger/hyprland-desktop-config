@@ -19,64 +19,64 @@ window#waybar {
 
 /*----------Tooltip----------------------*/
 tooltip {
-    background: #1a1110;
-    border: 1px solid #534341;
+    background: #15130c;
+    border: 1px solid #4a4739;
     border-radius: 12px;
 }
 
 tooltip label {
-    color: #f1dedc;
+    color: #e8e2d4;
     padding: 6px;
 }
 
 /*----------Workspaces-------------------*/
 #workspaces {
-    background-color: #1a1110;
+    background-color: #15130c;
     padding: 5px 6px;
     margin: 0 0 0 12px;
     border-radius: 18px;
-    border: 1px solid #534341;
-    color: #f1dedc;
+    border: 1px solid #4a4739;
+    color: #e8e2d4;
 }
 
 #workspaces button {
     padding: 0px 4px;
     margin: 0px 3px;
     border-radius: 16px;
-    color: #d8c2be;
-    background-color: #271d1c;
+    color: #ccc6b4;
+    background-color: #222017;
     transition: all 150ms ease-in-out;
 }
 
 #workspaces button.active {
-    background-color: #f1dedc;
-    color: #1a1110;
+    background-color: #e8e2d4;
+    color: #15130c;
     min-width: 30px;
     transition: all 150ms ease-in-out;
 }
 
 #workspaces button:hover {
-    background-color: #3d3231;
-    color: #442925;
+    background-color: #37352b;
+    color: #363016;
     border-radius: 16px;
     min-width: 30px;
 }
 
 #workspaces button.urgent {
     background-color: #ffb4ab;
-    color: #1a1110;
+    color: #15130c;
     border-radius: 16px;
     transition: all 150ms ease-in-out;
 }
 
 /*----------Scratchpad-------------------*/
 #scratchpad {
-    background-color: #1a1110;
+    background-color: #15130c;
     padding: 0 15px;
     margin: 0 0 0 12px;
-    border: 1px solid #534341;
+    border: 1px solid #4a4739;
     border-radius: 12px;
-    color: #f1dedc;
+    color: #e8e2d4;
 }
 
 /*----------Module Containers------------*/
@@ -88,27 +88,27 @@ tooltip label {
 #custom-notification,
 #clock,
 #custom-power {
-    background-color: #1a1110;
+    background-color: #15130c;
     padding: 0 15px;
     margin: 0 0 0 12px;
-    border: 1px solid #534341;
+    border: 1px solid #4a4739;
     border-radius: 12px;
-    color: #f1dedc;
+    color: #e8e2d4;
 }
 
 /*----------Clock------------------------*/
 #clock {
-    color: #dec38c;
+    color: #a8d0b5;
 }
 
 /*----------Pulseaudio-------------------*/
 #pulseaudio {
-    color: #dec38c;
+    color: #a8d0b5;
 }
 
 /*----------Temperature------------------*/
 #temperature {
-    color: #e7bdb6;
+    color: #d0c7a2;
 }
 
 #temperature.critical {
@@ -117,24 +117,24 @@ tooltip label {
 
 /*----------CPU--------------------------*/
 #cpu {
-    color: #ffb4a8;
+    color: #d9c76f;
     padding: 0 8px;
 }
 
 /*----------Memory-----------------------*/
 #memory {
-    color: #ffb4a8;
+    color: #d9c76f;
     padding: 0 8px;
 }
 
 /*----------Network----------------------*/
 #network {
-    color: #e7bdb6;
+    color: #d0c7a2;
 }
 
 /*----------Notification-----------------*/
 #custom-notification {
-    color: #f1dedc;
+    color: #e8e2d4;
     margin: 0 12px;
 }
 

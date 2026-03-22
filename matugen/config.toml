@@ -29,6 +29,12 @@ input_path = '~/.config/matugen/templates/wezterm.toml'
 output_path = '~/.config/wezterm/colors/matugen-theme.toml'
 post_hook = 'touch ~/.config/wezterm/wezterm.lua'
 
+# hyprland
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/hyprland-colors.conf'
+output_path = '~/.config/hypr/colors.conf'
+post_hook = 'hyprctl reload'
+
 # waybar
 [templates.waybar]
 input_path = '~/.config/matugen/templates/waybar.css'
