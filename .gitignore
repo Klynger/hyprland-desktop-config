@@ -1,4 +1,5 @@
 hypr/monitors.conf
 hypr/colors.conf
+waybar/style.css
 systemd/user/default.target.wants/
 systemd/user/timers.target.wants/
