@@ -9,3 +9,11 @@ wezterm/colors/matugen-theme.toml
 rofi/colors.rasi
 systemd/user/default.target.wants/
 systemd/user/timers.target.wants/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Machine-specific
+hypr/autostart.conf
