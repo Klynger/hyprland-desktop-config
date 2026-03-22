@@ -1,13 +1,13 @@
 [colors]
-background = "#191113"
-foreground = "#efdee0"
-cursor_bg = "#efdee0"
-cursor_border = "#efdee0"
-cursor_fg = "#d6c2c5"
-selection_bg = "#e4bdc4"
-selection_fg = "#43292f"
+background = "#1a1110"
+foreground = "#f1dedc"
+cursor_bg = "#f1dedc"
+cursor_border = "#f1dedc"
+cursor_fg = "#d8c2be"
+selection_bg = "#e7bdb6"
+selection_fg = "#442925"
 
-split = "#e4bdc4"
+split = "#e7bdb6"
 
 ansi = [
     "#191919",

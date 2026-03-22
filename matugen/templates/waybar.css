@@ -19,64 +19,64 @@ window#waybar {
 
 /*----------Tooltip----------------------*/
 tooltip {
-    background: #1a1110;
-    border: 1px solid #534341;
+    background: {{colors.surface.default.hex}};
+    border: 1px solid {{colors.surface_variant.default.hex}};
     border-radius: 12px;
 }
 
 tooltip label {
-    color: #f1dedc;
+    color: {{colors.on_surface.default.hex}};
     padding: 6px;
 }
 
 /*----------Workspaces-------------------*/
 #workspaces {
-    background-color: #1a1110;
+    background-color: {{colors.surface.default.hex}};
     padding: 5px 6px;
     margin: 0 0 0 12px;
     border-radius: 18px;
-    border: 1px solid #534341;
-    color: #f1dedc;
+    border: 1px solid {{colors.surface_variant.default.hex}};
+    color: {{colors.on_surface.default.hex}};
 }
 
 #workspaces button {
     padding: 0px 4px;
     margin: 0px 3px;
     border-radius: 16px;
-    color: #d8c2be;
-    background-color: #271d1c;
+    color: {{colors.on_surface_variant.default.hex}};
+    background-color: {{colors.surface_container.default.hex}};
     transition: all 150ms ease-in-out;
 }
 
 #workspaces button.active {
-    background-color: #f1dedc;
-    color: #1a1110;
+    background-color: {{colors.on_surface.default.hex}};
+    color: {{colors.surface.default.hex}};
     min-width: 30px;
     transition: all 150ms ease-in-out;
 }
 
 #workspaces button:hover {
-    background-color: #3d3231;
-    color: #442925;
+    background-color: {{colors.surface_container_highest.default.hex}};
+    color: {{colors.on_secondary.default.hex}};
     border-radius: 16px;
     min-width: 30px;
 }
 
 #workspaces button.urgent {
-    background-color: #ffb4ab;
-    color: #1a1110;
+    background-color: {{colors.error.default.hex}};
+    color: {{colors.surface.default.hex}};
     border-radius: 16px;
     transition: all 150ms ease-in-out;
 }
 
 /*----------Scratchpad-------------------*/
 #scratchpad {
-    background-color: #1a1110;
+    background-color: {{colors.surface.default.hex}};
     padding: 0 15px;
     margin: 0 0 0 12px;
-    border: 1px solid #534341;
+    border: 1px solid {{colors.surface_variant.default.hex}};
     border-radius: 12px;
-    color: #f1dedc;
+    color: {{colors.on_surface.default.hex}};
 }
 
 /*----------Module Containers------------*/
@@ -88,57 +88,57 @@ tooltip label {
 #custom-notification,
 #clock,
 #custom-power {
-    background-color: #1a1110;
+    background-color: {{colors.surface.default.hex}};
     padding: 0 15px;
     margin: 0 0 0 12px;
-    border: 1px solid #534341;
+    border: 1px solid {{colors.surface_variant.default.hex}};
     border-radius: 12px;
-    color: #f1dedc;
+    color: {{colors.on_surface.default.hex}};
 }
 
 /*----------Clock------------------------*/
 #clock {
-    color: #dec38c;
+    color: {{colors.tertiary.default.hex}};
 }
 
 /*----------Pulseaudio-------------------*/
 #pulseaudio {
-    color: #dec38c;
+    color: {{colors.tertiary.default.hex}};
 }
 
 /*----------Temperature------------------*/
 #temperature {
-    color: #e7bdb6;
+    color: {{colors.secondary.default.hex}};
 }
 
 #temperature.critical {
-    color: #ffb4ab;
+    color: {{colors.error.default.hex}};
 }
 
 /*----------CPU--------------------------*/
 #cpu {
-    color: #ffb4a8;
+    color: {{colors.primary.default.hex}};
     padding: 0 8px;
 }
 
 /*----------Memory-----------------------*/
 #memory {
-    color: #ffb4a8;
+    color: {{colors.primary.default.hex}};
     padding: 0 8px;
 }
 
 /*----------Network----------------------*/
 #network {
-    color: #e7bdb6;
+    color: {{colors.secondary.default.hex}};
 }
 
 /*----------Notification-----------------*/
 #custom-notification {
-    color: #f1dedc;
+    color: {{colors.on_surface.default.hex}};
     margin: 0 12px;
 }
 
 /*----------Power------------------------*/
 #custom-power {
-    color: #ffb4ab;
+    color: {{colors.error.default.hex}};
 }

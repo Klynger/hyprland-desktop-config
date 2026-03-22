@@ -37,3 +37,10 @@ mkdir -p "$(dirname "$LAST_WALLPAPER_FILE")"
 echo "$WALLPAPER" > "$LAST_WALLPAPER_FILE"
 
 swww img "$WALLPAPER" --transition-fps 240 --transition-type random --transition-duration 2
+
+# Regenerate theme colors from wallpaper and reload apps
+# matugen post_hooks handle: btop, gtk, swaync, wezterm, wofi
+matugen image "$WALLPAPER" -c "$HOME/.config/matugen/config.toml" --source-color-index 0
+
+# Restart waybar fully (SIGUSR2 only reloads CSS, not always reliable)
+launch-waybar
