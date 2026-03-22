@@ -5,27 +5,27 @@
  */
 
 /* Surface colors - Material You layering system */
-@define-color surface #191113;
-@define-color surface-dim #191113;
-@define-color surface-bright #413738;
-@define-color surface-container #261d1f;
-@define-color surface-container-low #22191b;
-@define-color surface-container-high #312829;
-@define-color surface-container-highest #3c3234;
+@define-color surface #1a1110;
+@define-color surface-dim #1a1110;
+@define-color surface-bright #423735;
+@define-color surface-container #271d1c;
+@define-color surface-container-low #231918;
+@define-color surface-container-high #322826;
+@define-color surface-container-highest #3d3231;
 
 /* Primary colors - main accent */
-@define-color primary #ffb1c3;
-@define-color on-primary #551d2e;
-@define-color primary-container #713344;
-@define-color on-primary-container #ffd9e0;
+@define-color primary #ffb4a8;
+@define-color on-primary #561e17;
+@define-color primary-container #73342b;
+@define-color on-primary-container #ffdad5;
 
 /* Surface text colors */
-@define-color on-surface #efdee0;
-@define-color on-surface-variant #d6c2c5;
+@define-color on-surface #f1dedc;
+@define-color on-surface-variant #d8c2be;
 
 /* Outline colors */
-@define-color outline #9e8c8f;
-@define-color outline-variant #514346;
+@define-color outline #a08c89;
+@define-color outline-variant #534341;
 
 /* Application-specific color mappings */
 @define-color base @surface-container-low;

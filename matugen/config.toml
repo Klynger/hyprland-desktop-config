@@ -29,6 +29,11 @@ input_path = '~/.config/matugen/templates/wezterm.toml'
 output_path = '~/.config/wezterm/colors/matugen-theme.toml'
 post_hook = 'touch ~/.config/wezterm/wezterm.lua'
 
+# waybar
+[templates.waybar]
+input_path = '~/.config/matugen/templates/waybar.css'
+output_path = '~/.config/waybar/style.css'
+
 # wofi
 [templates.wofi]
 input_path = '~/.config/matugen/templates/wofi.css'
