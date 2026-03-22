@@ -93,3 +93,4 @@ All scripts in `bin/` are auto-discovered by `install-binaries.sh` — no regist
 - `symlinks.conf` must use eval-expandable paths only (`$(pwd)`, `$HOME`)
 - New `bin/` scripts must be `chmod +x`
 - When adding a new config directory, add its symlink entry to `symlinks.conf`
+- When adding or removing a dependency, update `DEPENDENCIES.md` to keep it in sync

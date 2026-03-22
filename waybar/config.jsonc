@@ -8,14 +8,23 @@
     "margin-left": 8,
     "spacing": 0,
     "modules-left": [
-        "clock",
-        "hyprland/workspaces",
-        "hyprland/scratchpad"
+        "hyprland/workspaces"
     ],
+    "modules-center": [
+        "group/media"
+    ],
+    "group/media": {
+        "orientation": "horizontal",
+        "modules": [
+            "image#media-art",
+            "mpris"
+        ]
+    },
     "modules-right": [
         "pulseaudio",
         "group/hardware",
         "network",
+        "clock",
         "custom/notification",
         "custom/power"
     ],
@@ -28,6 +37,12 @@
         ]
     },
     // Modules configuration
+    "image#media-art": {
+        "exec": "$HOME/.config/waybar/scripts/media-art.sh",
+        "size": 24,
+        "interval": 5,
+        "on-click": "quick-panel"
+    },
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -51,18 +66,11 @@
             "5": "5: Chat"
         }
     },
-    "hyprland/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
     "clock": {
         "interval": 60,
-        "format": "{:%H:%M}",
+        "format": "{:%a %d %b   %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "on-click": "gtk-launch org.gnome.Calendar"
     },
     "cpu": {
         "format": "CPU {usage}%",
@@ -110,6 +118,29 @@
         },
         "scroll-step": 1,
         "on-click": "pavucontrol"
+    },
+    "mpris": {
+        "format": "{player_icon} {dynamic}",
+        "format-paused": "{status_icon} {dynamic}",
+        "format-stopped": "",
+        "dynamic-order": ["title", "artist"],
+        "max-length": 40,
+        "player-icons": {
+            "chromium": "",
+            "firefox": "",
+            "mpv": "󰐹",
+            "spotify": "󰎆",
+            "default": ""
+        },
+        "status-icons": {
+            "paused": "",
+            "playing": "",
+            "stopped": ""
+        },
+        "on-click": "quick-panel",
+        "on-click-middle": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "tooltip-format": "{title}\n{artist}\n{album}"
     },
     "custom/notification": {
         "tooltip": true,

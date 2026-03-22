@@ -69,13 +69,33 @@ tooltip label {
     transition: all 150ms ease-in-out;
 }
 
-/*----------Shared module style----------*/
-#scratchpad,
+/*----------Module Containers------------*/
 #pulseaudio,
 #network,
 #custom-notification,
 #clock,
 #custom-power,
+#hardware {
+    background-color: {{colors.surface.default.hex}};
+    padding: 0 12px;
+    border: 1px solid {{colors.surface_variant.default.hex}};
+    border-radius: 24px;
+    color: {{colors.on_surface.default.hex}};
+}
+
+/*----------Clock------------------------*/
+#clock {
+    color: {{colors.tertiary.default.hex}};
+    margin: 0 0 0 8px;
+}
+
+/*----------Pulseaudio (first right module)---*/
+#pulseaudio {
+    color: {{colors.tertiary.default.hex}};
+    margin: 0 0 0 8px;
+}
+
+/*----------Hardware Group (right side)---*/
 #hardware {
     background-color: {{colors.surface.default.hex}};
     padding: 0 12px;
@@ -85,22 +105,14 @@ tooltip label {
     color: {{colors.on_surface.default.hex}};
 }
 
-/*----------Clock------------------------*/
-#clock {
-    color: {{colors.tertiary.default.hex}};
-}
-
-/*----------Pulseaudio-------------------*/
-#pulseaudio {
-    color: {{colors.tertiary.default.hex}};
-}
-
-/*----------Hardware modules (inside group)--*/
 #temperature,
 #cpu,
 #memory {
-    color: {{colors.primary.default.hex}};
+    background-color: transparent;
+    border: none;
+    margin: 0;
     padding: 0 4px;
+    color: {{colors.primary.default.hex}};
 }
 
 #temperature.critical {
@@ -110,18 +122,46 @@ tooltip label {
 /*----------Network----------------------*/
 #network {
     color: {{colors.secondary.default.hex}};
+    margin: 0 0 0 8px;
+}
+
+/*----------Media Group------------------*/
+#media {
+    background-color: {{colors.surface.default.hex}};
+    padding: 0 12px;
+    border: 1px solid {{colors.surface_variant.default.hex}};
+    border-radius: 24px;
+    color: {{colors.on_surface.default.hex}};
+}
+
+#image-media-art {
+    background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 4px 0 0;
+    border-radius: 4px;
+}
+
+#mpris {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    color: {{colors.on_surface.default.hex}};
+}
+
+#mpris.paused {
+    color: {{colors.on_surface_variant.default.hex}};
 }
 
 /*----------Notification-----------------*/
 #custom-notification {
-    font-size: 16px;
+    color: {{colors.on_surface.default.hex}};
+    margin: 0 0 0 8px;
 }
 
-#custom-notification label {
-    color: inherit;
-}
-
-/*----------Power------------------------*/
+/*----------Power (last right module)----*/
 #custom-power {
     color: {{colors.error.default.hex}};
+    margin: 0 12px 0 8px;
 }
