@@ -1,0 +1,48 @@
+@theme "~/.config/rofi/theme.rasi"
+
+configuration {
+}
+
+window {
+    width:  70%;
+}
+
+inputbar {
+    enabled: false;
+}
+
+listview {
+    columns:        5;
+    lines:          1;
+    flow:           horizontal;
+    fixed-height:   true;
+    spacing:        16px;
+    padding:        4px;
+    background-color: transparent;
+}
+
+element {
+    orientation:    vertical;
+    padding:        4px;
+    border-radius:  14px;
+    background-color: transparent;
+    expand:         false;
+}
+
+element-icon {
+    size:           160px;
+    border-radius:  10px;
+    background-color: transparent;
+}
+
+element selected {
+    background-color: @accent;
+}
+
+element-text {
+    enabled: false;
+}
+
+scrollbar {
+    handle-width: 0px;
+}

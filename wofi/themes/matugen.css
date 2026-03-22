@@ -1,0 +1,37 @@
+/*
+ * Wofi Material You Theme
+ * Generated with Matugen
+ * Material You color palette following Material Design 3 guidelines
+ */
+
+/* Surface colors - Material You layering system */
+@define-color surface #15130c;
+@define-color surface-dim #15130c;
+@define-color surface-bright #3c3930;
+@define-color surface-container #222017;
+@define-color surface-container-low #1e1c13;
+@define-color surface-container-high #2c2a21;
+@define-color surface-container-highest #37352b;
+
+/* Primary colors - main accent */
+@define-color primary #d9c76f;
+@define-color on-primary #383000;
+@define-color primary-container #524700;
+@define-color on-primary-container #f6e388;
+
+/* Surface text colors */
+@define-color on-surface #e8e2d4;
+@define-color on-surface-variant #ccc6b4;
+
+/* Outline colors */
+@define-color outline #969180;
+@define-color outline-variant #4a4739;
+
+/* Application-specific color mappings */
+@define-color base @surface-container-low;
+@define-color base-selected @primary-container;
+@define-color border-color @primary;
+@define-color text-color @on-surface;
+@define-color text-color-secondary @on-surface-variant;
+@define-color input-bg @surface-container-highest;
+@define-color input-border @outline-variant;

@@ -1,36 +1,45 @@
 #!/bin/bash
 
-# Changes the wallpaper using swww
+# Changes the wallpaper using swww, regenerates theme colors with matugen.
+# Usage: change-wallpaper [/path/to/wallpaper]
+# If no argument is given, picks a random wallpaper.
+
+set -euo pipefail
 
 WALLPAPERS_DIR="$HOME/Pictures/Wallpapers/current"
 LAST_WALLPAPER_FILE="$HOME/.cache/last_wallpaper"
 
-# Check if wallpaper directory exists
-if [[ ! -d "$WALLPAPERS_DIR" ]]; then
-  notify-send "Wallpaper directory does not exist: $WALLPAPERS_DIR" -u critical -t 3000
-  exit 1
-fi
-
-# Check if there are any wallpaper files
-if [[ $(find "$WALLPAPERS_DIR" -type f | wc -l) -eq 0 ]]; then
-  notify-send "No wallpaper files found in $WALLPAPERS_DIR" -u critical -t 3000
-  exit 1
-fi
-
-# Get current wallpaper
-LAST_WALLPAPER=""
-if [[ -f "$LAST_WALLPAPER_FILE" ]]; then
-  LAST_WALLPAPER=$(cat "$LAST_WALLPAPER_FILE")
-fi
-
-# Find all wallpapers except the last one
-mapfile -t  WALLPAPERS < <(find "$WALLPAPERS_DIR" -type f ! -path "$LAST_WALLPAPER")
-
-if [[ ${#WALLPAPERS[@]} -eq 0 ]]; then
-  # Fallback if only one wallpaper exists
-  WALLPAPER=$(find "$WALLPAPERS_DIR" -type -f | head -n 1)
+if [[ -n "${1:-}" ]]; then
+    # Specific wallpaper requested
+    if [[ ! -f "$1" ]]; then
+        notify-send "Wallpaper not found: $1" -u critical -t 3000
+        exit 1
+    fi
+    WALLPAPER="$1"
 else
-  WALLPAPER=$(printf '%s\n' "${WALLPAPERS[@]}" | shuf -n 1)
+    # Random selection
+    if [[ ! -d "$WALLPAPERS_DIR" ]]; then
+        notify-send "Wallpaper directory does not exist: $WALLPAPERS_DIR" -u critical -t 3000
+        exit 1
+    fi
+
+    if [[ $(find "$WALLPAPERS_DIR" -type f | wc -l) -eq 0 ]]; then
+        notify-send "No wallpaper files found in $WALLPAPERS_DIR" -u critical -t 3000
+        exit 1
+    fi
+
+    LAST_WALLPAPER=""
+    if [[ -f "$LAST_WALLPAPER_FILE" ]]; then
+        LAST_WALLPAPER=$(cat "$LAST_WALLPAPER_FILE")
+    fi
+
+    mapfile -t WALLPAPERS < <(find "$WALLPAPERS_DIR" -type f ! -path "$LAST_WALLPAPER")
+
+    if [[ ${#WALLPAPERS[@]} -eq 0 ]]; then
+        WALLPAPER=$(find "$WALLPAPERS_DIR" -type f | head -n 1)
+    else
+        WALLPAPER=$(printf '%s\n' "${WALLPAPERS[@]}" | shuf -n 1)
+    fi
 fi
 
 mkdir -p "$(dirname "$LAST_WALLPAPER_FILE")"
@@ -39,7 +48,7 @@ echo "$WALLPAPER" > "$LAST_WALLPAPER_FILE"
 swww img "$WALLPAPER" --transition-fps 240 --transition-type random --transition-duration 2
 
 # Regenerate theme colors from wallpaper and reload apps
-# matugen post_hooks handle: btop, gtk, swaync, wezterm, wofi
+# matugen post_hooks handle: btop, gtk, swaync, wezterm, wofi, hyprland
 matugen image "$WALLPAPER" -c "$HOME/.config/matugen/config.toml" --source-color-index 0
 
 # Reload waybar CSS
