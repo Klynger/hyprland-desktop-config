@@ -1,0 +1,12 @@
+configuration {
+    show-icons:     true;
+    icon-theme:     "Papirus-Dark";
+    font:           "JetBrainsMono Nerd Font Propo 12";
+    drun-display-format: "{name}";
+
+    /* Navigation */
+    kb-row-up:      "Up,Control+p";
+    kb-row-down:    "Down,Control+n";
+}
+
+@theme "~/.config/rofi/theme.rasi"

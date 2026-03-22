@@ -40,10 +40,10 @@ post_hook = 'hyprctl reload'
 input_path = '~/.config/matugen/templates/waybar.css'
 output_path = '~/.config/waybar/style.css'
 
-# wofi
-[templates.wofi]
-input_path = '~/.config/matugen/templates/wofi.css'
-output_path = '~/.config/wofi/themes/matugen.css'
+# rofi
+[templates.rofi]
+input_path = '~/.config/matugen/templates/rofi-colors.rasi'
+output_path = '~/.config/rofi/colors.rasi'
 
 [config.custom_colors.red]
 color = "#FF0000"

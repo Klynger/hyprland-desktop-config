@@ -6,6 +6,6 @@ gtk-3.0/colors.css
 gtk-4.0/colors.css
 swaync/matugen/matugen-swaync.css
 wezterm/colors/matugen-theme.toml
-wofi/themes/matugen.css
+rofi/colors.rasi
 systemd/user/default.target.wants/
 systemd/user/timers.target.wants/
