@@ -174,15 +174,25 @@ class MediaModule:
 
         sel = selectors.DefaultSelector()
 
-        # playerctl --follow status
+        # playerctl --follow status (play/pause/stop changes)
         try:
-            p_proc = subprocess.Popen(
+            p_status = subprocess.Popen(
                 ["playerctl", "--follow", "status"],
                 stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
             )
-            sel.register(p_proc.stdout, selectors.EVENT_READ, "playerctl")
+            sel.register(p_status.stdout, selectors.EVENT_READ, "playerctl_status")
         except FileNotFoundError:
-            p_proc = None
+            p_status = None
+
+        # playerctl --follow metadata (track changes)
+        try:
+            p_meta = subprocess.Popen(
+                ["playerctl", "--follow", "metadata"],
+                stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+            )
+            sel.register(p_meta.stdout, selectors.EVENT_READ, "playerctl_meta")
+        except FileNotFoundError:
+            p_meta = None
 
         # Hyprland IPC socket
         hypr_sig = os.environ.get("HYPRLAND_INSTANCE_SIGNATURE", "")
@@ -210,8 +220,10 @@ class MediaModule:
                     self._update_state()
                     self._emit()
         finally:
-            if p_proc:
-                p_proc.kill()
+            if p_status:
+                p_status.kill()
+            if p_meta:
+                p_meta.kill()
             if s_proc:
                 s_proc.kill()
             sel.close()
