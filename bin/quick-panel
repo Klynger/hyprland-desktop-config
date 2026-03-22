@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+
+"""QuickPanel launcher — handles LD_PRELOAD, single-instance toggle, and starts the app."""
+
+import os
+import sys
+import signal
+import subprocess
+from pathlib import Path
+
+# gtk4-layer-shell must be preloaded before libwayland-client
+_LAYER_SHELL_LIB = "/usr/lib/libgtk4-layer-shell.so"
+if os.path.exists(_LAYER_SHELL_LIB) and _LAYER_SHELL_LIB not in os.environ.get("LD_PRELOAD", ""):
+    os.environ["LD_PRELOAD"] = _LAYER_SHELL_LIB
+    os.execvp(sys.argv[0], sys.argv)
+
+# Single instance toggle via pidfile
+_PIDFILE = Path(os.environ.get("XDG_RUNTIME_DIR", "/tmp")) / "quick-panel.pid"
+
+def _is_running(pid):
+    """Check if a process with this PID is alive."""
+    try:
+        os.kill(pid, 0)
+        return True
+    except (OSError, ProcessLookupError):
+        return False
+
+if _PIDFILE.exists():
+    try:
+        old_pid = int(_PIDFILE.read_text().strip())
+        if old_pid != os.getpid() and _is_running(old_pid):
+            os.kill(old_pid, signal.SIGTERM)
+            _PIDFILE.unlink(missing_ok=True)
+            sys.exit(0)
+    except (ValueError, ProcessLookupError):
+        pass
+
+_PIDFILE.write_text(str(os.getpid()))
+
+try:
+    # Import and run
+    sys.path.insert(0, os.path.expanduser("~/.config/quick-panel"))
+    from app import QuickPanel
+
+    app = QuickPanel()
+    app.run([])
+finally:
+    _PIDFILE.unlink(missing_ok=True)

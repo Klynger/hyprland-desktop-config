@@ -1,0 +1,118 @@
+/* QuickPanel — Material You styling via matugen GTK4 colors */
+
+window,
+window.background,
+.background {
+    background-color: transparent;
+    background: transparent;
+}
+
+.quick-panel {
+    background-color: @window_bg_color;
+    color: @window_fg_color;
+    padding: 20px;
+    border-radius: 28px;
+}
+
+.media-card {
+    background-color: @card_bg_color;
+    border-radius: 24px;
+    padding: 16px;
+}
+
+.album-art-frame {
+    border-radius: 16px;
+}
+
+.album-art {
+    border-radius: 16px;
+}
+
+.media-title {
+    font-size: 15px;
+    font-weight: bold;
+    color: @window_fg_color;
+}
+
+.media-artist {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+.media-album {
+    font-size: 11px;
+    opacity: 0.5;
+    font-style: italic;
+}
+
+.media-player-source {
+    font-size: 11px;
+    opacity: 0.5;
+}
+
+.control-btn,
+.control-btn-play,
+.launch-btn {
+    border: none;
+    box-shadow: none;
+    outline: none;
+    background-image: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 9999px;
+    transition: 150ms ease-in-out;
+    -gtk-icon-size: 0;
+}
+
+.control-btn {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 20px;
+    color: @window_fg_color;
+    background-color: transparent;
+}
+
+.control-btn:hover {
+    background-color: alpha(@window_fg_color, 0.08);
+}
+
+.control-btn:active {
+    background-color: alpha(@window_fg_color, 0.12);
+}
+
+.control-btn-play {
+    min-width: 56px;
+    min-height: 56px;
+    font-size: 28px;
+    background-color: @accent_bg_color;
+    color: @accent_fg_color;
+}
+
+.control-btn-play:hover {
+    background-color: shade(@accent_bg_color, 0.9);
+}
+
+.control-btn-play:active {
+    background-color: shade(@accent_bg_color, 0.8);
+}
+
+.launch-btn {
+    min-width: 48px;
+    min-height: 48px;
+    font-size: 20px;
+    background-color: alpha(@accent_bg_color, 0.15);
+    color: @accent_bg_color;
+}
+
+.launch-btn:hover {
+    background-color: alpha(@accent_bg_color, 0.25);
+}
+
+.launch-label {
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+.no-media {
+    padding: 24px;
+}

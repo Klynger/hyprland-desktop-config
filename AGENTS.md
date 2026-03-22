@@ -11,7 +11,7 @@ The primary languages are **Bash** (scripts), **Hyprland config DSL** (`.conf`),
 Manages configuration for a complete Wayland desktop environment:
 - **Hyprland** — Wayland compositor / window manager
 - **Waybar** — Status bar
-- **Wofi** — App launcher
+- **Rofi** — App launcher
 - **WezTerm** — Terminal emulator
 - **Swaync** — Notification center
 - **Hypridle / Hyprlock** — Idle management and lock screen
@@ -213,25 +213,7 @@ mapfile -t ITEMS < <(some_command)
 
 ## Key External Tools (Required on System)
 
-The following must be installed for this config to function. See `tools_to_install.txt` for the full list.
-
-| Tool | Used by |
-|------|---------|
-| `hyprctl`, `hyprland` | Window manager |
-| `waybar` | Status bar |
-| `rofi` | App launcher |
-| `swww` | Wallpaper daemon |
-| `swaync` | Notifications |
-| `hypridle`, `hyprlock` | Idle/lock |
-| `matugen` | Color theming |
-| `jq` | JSON parsing in `launch-or-focus` |
-| `gum` | Interactive prompts in `webapp-install` |
-| `playerctl` | Media key bindings |
-| `brightnessctl` | Backlight control |
-| `wpctl` | Volume control |
-| `gsettings` | GTK theme toggling |
-| `xdg-terminal-exec` | Terminal launching |
-| `rfkill` | WiFi toggling |
+See `DEPENDENCIES.md` for the full categorized list of all external dependencies. When adding or removing a dependency, always update `DEPENDENCIES.md` to keep it in sync.
 
 ---
 
