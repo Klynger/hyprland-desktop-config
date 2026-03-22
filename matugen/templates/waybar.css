@@ -141,4 +141,5 @@ tooltip label {
 /*----------Power------------------------*/
 #custom-power {
     color: {{colors.error.default.hex}};
+    margin-right: 12px;
 }
