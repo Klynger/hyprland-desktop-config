@@ -4,6 +4,8 @@
     "position": "top",
     "height": 35,
     "margin-top": 8,
+    "margin-right": 8,
+    "margin-left": 8,
     "spacing": 0,
     "modules-left": [
         "clock",
@@ -12,13 +14,19 @@
     ],
     "modules-right": [
         "pulseaudio",
-        "temperature",
-        "cpu",
-        "memory",
+        "group/hardware",
         "network",
         "custom/notification",
         "custom/power"
     ],
+    "group/hardware": {
+        "orientation": "horizontal",
+        "modules": [
+            "temperature",
+            "cpu",
+            "memory"
+        ]
+    },
     // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -58,16 +66,19 @@
     },
     "cpu": {
         "format": "CPU {usage}%",
-        "tooltip": false
+        "tooltip": false,
+        "on-click": "gtk-launch btop"
     },
     "memory": {
-        "format": "RAM {}%"
+        "format": "RAM {}%",
+        "on-click": "gtk-launch btop"
     },
     "temperature": {
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         "format-critical": "TEMP {temperatureC}°C",
-        "format": "TEMP {temperatureC}°C"
+        "format": "TEMP {temperatureC}°C",
+        "on-click": "gtk-launch btop"
     },
     "network": {
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
@@ -102,7 +113,7 @@
     },
     "custom/notification": {
         "tooltip": true,
-        "format": "<span size='16pt'>{icon}</span>",
+        "format": "{icon}",
         "format-icons": {
             "notification": "󱅫",
             "none": "󰂜",
