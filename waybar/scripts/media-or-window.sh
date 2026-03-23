@@ -85,8 +85,16 @@ emit
     playerctl --follow status 2>/dev/null &
     PLAYERCTL_PID=$!
 
-    # socat listens to Hyprland's socket for activewindow changes
-    socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - 2>/dev/null &
+    # Listen to Hyprland's IPC socket for activewindow changes
+    python3 -uc "
+import socket, sys, os
+s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+s.connect(os.environ['XDG_RUNTIME_DIR'] + '/hypr/' + os.environ['HYPRLAND_INSTANCE_SIGNATURE'] + '/.socket2.sock')
+f = s.makefile()
+for line in f:
+    sys.stdout.write(line)
+    sys.stdout.flush()
+" 2>/dev/null &
     SOCAT_PID=$!
 
     trap 'kill $PLAYERCTL_PID $SOCAT_PID 2>/dev/null; rm -f "$ART_CACHE"' EXIT

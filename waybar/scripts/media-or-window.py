@@ -8,6 +8,7 @@ import json
 import os
 import shutil
 import signal
+import socket
 import subprocess
 import sys
 import threading
@@ -180,7 +181,7 @@ class MediaModule:
                 ["playerctl", "--follow", "status"],
                 stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
             )
-            sel.register(p_status.stdout, selectors.EVENT_READ, "playerctl_status")
+            sel.register(p_status.stdout.fileno(), selectors.EVENT_READ, "playerctl_status")
         except FileNotFoundError:
             p_status = None
 
@@ -190,33 +191,36 @@ class MediaModule:
                 ["playerctl", "--follow", "metadata"],
                 stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
             )
-            sel.register(p_meta.stdout, selectors.EVENT_READ, "playerctl_meta")
+            sel.register(p_meta.stdout.fileno(), selectors.EVENT_READ, "playerctl_meta")
         except FileNotFoundError:
             p_meta = None
 
-        # Hyprland IPC socket
+        # Hyprland IPC socket (direct connection, no socat needed)
         hypr_sig = os.environ.get("HYPRLAND_INSTANCE_SIGNATURE", "")
         xdg = os.environ.get("XDG_RUNTIME_DIR", "")
         sock_path = f"{xdg}/hypr/{hypr_sig}/.socket2.sock"
 
-        s_proc = None
-        if os.path.exists(sock_path):
+        hypr_sock = None
+        if hypr_sig and os.path.exists(sock_path):
             try:
-                s_proc = subprocess.Popen(
-                    ["socat", "-u", f"UNIX-CONNECT:{sock_path}", "-"],
-                    stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
-                )
-                sel.register(s_proc.stdout, selectors.EVENT_READ, "hyprland")
-            except FileNotFoundError:
-                s_proc = None
+                hypr_sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+                hypr_sock.connect(sock_path)
+                hypr_sock.setblocking(False)
+                sel.register(hypr_sock.fileno(), selectors.EVENT_READ, "hyprland")
+            except OSError:
+                hypr_sock = None
 
         try:
             while not self._stop.is_set():
                 events = sel.select(timeout=1)
+                needs_update = False
                 for key, _ in events:
-                    line = key.fileobj.readline()
-                    if not line:
+                    data = os.read(key.fileobj, 4096)
+                    if not data:
+                        sel.unregister(key.fileobj)
                         continue
+                    needs_update = True
+                if needs_update:
                     self._update_state()
                     self._emit()
         finally:
@@ -224,8 +228,8 @@ class MediaModule:
                 p_status.kill()
             if p_meta:
                 p_meta.kill()
-            if s_proc:
-                s_proc.kill()
+            if hypr_sock:
+                hypr_sock.close()
             sel.close()
 
 
