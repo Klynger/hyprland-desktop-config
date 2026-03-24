@@ -64,6 +64,12 @@ External packages required by this configuration.
 | gtk4 | UI toolkit |
 | gtk4-layer-shell | Layer shell protocol for GTK4 |
 
+## Fonts
+
+| Package | Purpose |
+|---------|---------|
+| noto-fonts | Noto Sans — Material You UI font (lock screen, labels) |
+
 ## Theming
 
 | Package | Purpose |

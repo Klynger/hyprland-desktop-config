@@ -94,3 +94,4 @@ All scripts in `bin/` are auto-discovered by `install-binaries.sh` — no regist
 - New `bin/` scripts must be `chmod +x`
 - When adding a new config directory, add its symlink entry to `symlinks.conf`
 - When adding or removing a dependency, update `DEPENDENCIES.md` to keep it in sync
+- When adding font dependencies, update the Fonts section in `DEPENDENCIES.md`. Use `getnf -i <FontName>` for Nerd Fonts, or the system package manager for standard fonts (e.g., `noto-fonts`)
