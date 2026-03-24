@@ -13,6 +13,7 @@ External packages required by this configuration.
 | hyprshot | Screenshots |
 | waybar | Status bar |
 | rofi | App launcher / menus |
+| wlogout | Power/logout menu |
 | swaync | Notification daemon |
 | swww | Wallpaper daemon |
 | matugen | Material You color generation |
