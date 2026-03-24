@@ -22,11 +22,14 @@ fi
 mkdir -p "$CACHE_DIR"
 
 # Generate thumbnails and build rofi entries
+declare -A NAME_TO_PATH
 ENTRIES=""
 
 while IFS= read -r -d '' wallpaper; do
     name="$(basename "$wallpaper")"
     thumb="$CACHE_DIR/${name}.png"
+
+    NAME_TO_PATH["$name"]="$wallpaper"
 
     # Regenerate thumbnail if missing or older than source
     if [[ ! -f "$thumb" ]] || [[ "$wallpaper" -nt "$thumb" ]]; then
@@ -38,7 +41,7 @@ while IFS= read -r -d '' wallpaper; do
     fi
 
     # rofi dmenu format: display-text\0icon\x1f/path/to/icon
-    ENTRIES+="${wallpaper}\0icon\x1f${thumb}\n"
+    ENTRIES+="${name}\0icon\x1f${thumb}\n"
 done < <(find "$WALLPAPERS_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) -print0 | sort -z)
 
 if [[ -z "$ENTRIES" ]]; then
@@ -48,12 +51,15 @@ fi
 
 # Show rofi picker with wallpaper grid theme
 SELECTED=$(echo -en "$ENTRIES" | rofi -dmenu \
+    -p "Wallpaper" \
     -show-icons \
     -theme "$HOME/.config/rofi/themes/wallpaper-grid.rasi") || true
 
 [[ -z "$SELECTED" ]] && exit 0
 
-if [[ ! -f "$SELECTED" ]]; then
+# Resolve filename back to full path
+SELECTED="${NAME_TO_PATH["$SELECTED"]:-}"
+if [[ -z "$SELECTED" ]] || [[ ! -f "$SELECTED" ]]; then
     notify-send "Could not resolve wallpaper selection" -u critical -t 3000
     exit 1
 fi
