@@ -62,6 +62,11 @@ create_copies() {
             info "Directory created: $target_dir"
         fi
 
+        # Remove existing target to avoid nested copies from cp -r
+        if [[ -d "$target" ]]; then
+            rm -r "$target"
+        fi
+
         cp -r "$source" "$target"
         success "Copied: $source → $target"
     done < "$CONFIG_FILE"
@@ -97,10 +102,10 @@ configure_sddm_theme() {
 
     cat > "$conf_file" <<'CONF'
 [Theme]
-Current=
+Current=material-you
 CONF
 
-    success "SDDM theme set to default in $conf_file"
+    success "SDDM theme set to material-you in $conf_file"
 }
 
 case "${1:-}" in
