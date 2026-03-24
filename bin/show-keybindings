@@ -1,0 +1,135 @@
+#!/bin/bash
+
+# Display Hyprland keybindings in a searchable rofi menu.
+# Reads live keybindings from Hyprland via hyprctl and formats them.
+# Based on omarchy's omarchy-menu-keybindings.
+
+set -euo pipefail
+
+declare -A KEYCODE_SYM_MAP
+
+build_keymap_cache() {
+    local keymap
+    keymap="$(xkbcli compile-keymap)" || {
+        echo "Failed to compile keymap" >&2
+        return 1
+    }
+
+    while IFS=, read -r code sym; do
+        [[ -z "$code" || -z "$sym" ]] && continue
+        KEYCODE_SYM_MAP["$code"]="$sym"
+    done < <(
+        awk '
+            BEGIN { sec = "" }
+            /xkb_keycodes/ { sec = "codes"; next }
+            /xkb_symbols/  { sec = "syms";  next }
+            sec == "codes" {
+                if (match($0, /<([A-Za-z0-9_]+)>\s*=\s*([0-9]+)\s*;/, m)) code_by_name[m[1]] = m[2]
+            }
+            sec == "syms" {
+                if (match($0, /key\s*<([A-Za-z0-9_]+)>\s*\{\s*\[\s*([^, \]]+)/, m)) sym_by_name[m[1]] = m[2]
+            }
+            END {
+                for (k in code_by_name) {
+                    c = code_by_name[k]
+                    s = sym_by_name[k]
+                    if (c != "" && s != "" && s != "NoSymbol") print c "," s
+                }
+            }
+        ' <<<"$keymap"
+    )
+}
+
+parse_keycodes() {
+    while IFS= read -r line; do
+        if [[ "$line" =~ code:([0-9]+) ]]; then
+            local code="${BASH_REMATCH[1]}"
+            local symbol="${KEYCODE_SYM_MAP[$code]:-code:$code}"
+            echo "${line/code:${code}/$symbol}"
+        elif [[ "$line" =~ mouse:([0-9]+) ]]; then
+            local code="${BASH_REMATCH[1]}"
+            local symbol
+            case "$code" in
+                272) symbol="Left Click" ;;
+                273) symbol="Right Click" ;;
+                274) symbol="Middle Click" ;;
+                *)   symbol="mouse:${code}" ;;
+            esac
+            echo "${line/mouse:${code}/$symbol}"
+        else
+            echo "$line"
+        fi
+    done
+}
+
+# Fetch keybindings from Hyprland and pre-process
+dynamic_bindings() {
+    hyprctl -j binds |
+        jq -r '.[] | "\(.modmask),\(.key)@\(.keycode),\(.description),\(.dispatcher),\(.arg)"' |
+        sed -r \
+            -e 's/null//' \
+            -e 's/@0//' \
+            -e 's/,@/,code:/' \
+            -e 's/^0,/,/' \
+            -e 's/^1,/SHIFT + /' \
+            -e 's/^4,/CTRL + /' \
+            -e 's/^5,/SHIFT + CTRL + /' \
+            -e 's/^8,/ALT + /' \
+            -e 's/^9,/SHIFT + ALT + /' \
+            -e 's/^12,/CTRL + ALT + /' \
+            -e 's/^13,/SHIFT + CTRL + ALT + /' \
+            -e 's/^64,/SUPER + /' \
+            -e 's/^65,/SUPER + SHIFT + /' \
+            -e 's/^68,/SUPER + CTRL + /' \
+            -e 's/^69,/SUPER + SHIFT + CTRL + /' \
+            -e 's/^72,/SUPER + ALT + /' \
+            -e 's/^73,/SUPER + SHIFT + ALT + /' \
+            -e 's/^76,/SUPER + CTRL + ALT + /' \
+            -e 's/^77,/SUPER + SHIFT + CTRL + ALT + /'
+}
+
+# Parse and format keybindings into aligned output
+# After sed, format is: KEY_COMBO,DESCRIPTION,DISPATCHER,ARG...
+parse_bindings() {
+    awk -F, '{
+        key_combo = $1
+        gsub(/^[ \t]+|[ \t]+$/, "", key_combo)
+
+        # $2 = description (from bindd)
+        action = $2
+        gsub(/^[ \t]+|[ \t]+$/, "", action)
+
+        if (action == "") {
+            # Fall back to dispatcher + arg
+            action = ""
+            for (i = 3; i <= NF; i++) {
+                action = action $i (i < NF ? ", " : "")
+            }
+            sub(/,\s*$/, "", action)
+            gsub(/^[ \t]*exec,[ \t]*/, "", action)
+            gsub(/^[ \t]+|[ \t]+$/, "", action)
+        }
+
+        if (action != "" && key_combo != "") {
+            printf "%-30s  →  %s\n", key_combo, action
+        }
+    }'
+}
+
+output_keybindings() {
+    build_keymap_cache
+    dynamic_bindings |
+        sort -u |
+        parse_keycodes |
+        parse_bindings
+}
+
+if [[ "${1:-}" == "--print" || "${1:-}" == "-p" ]]; then
+    output_keybindings
+else
+    output_keybindings |
+        rofi -dmenu \
+            -p "Keybindings" \
+            -i \
+            -theme "$HOME/.config/rofi/themes/keybindings.rasi"
+fi
