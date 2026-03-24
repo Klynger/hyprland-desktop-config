@@ -40,6 +40,11 @@ post_hook = 'hyprctl reload'
 input_path = '~/.config/matugen/templates/waybar.css'
 output_path = '~/.config/waybar/matugen/colors.css'
 
+# hyprlock
+[templates.hyprlock]
+input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
+output_path = '~/.config/hypr/hyprlock-colors.conf'
+
 # rofi
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-colors.rasi'

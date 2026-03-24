@@ -226,3 +226,4 @@ See `DEPENDENCIES.md` for the full categorized list of all external dependencies
 - **When adding a new config directory**, add its symlink to `symlinks.conf` and document the target path.
 - **When adding a new `bin/` script**, it will be automatically picked up by `install-binaries.sh` — no registration needed.
 - **Rofi themes** in `rofi/themes/` are `.rasi` overrides loaded via `@theme` in individual scripts.
+- **When adding or changing font dependencies**, update the Fonts section in `DEPENDENCIES.md`. Nerd Fonts can be installed via `getnf -i <FontName>` (e.g., `getnf -i NotoSans`). System fonts (like `noto-fonts`) are installed via the system package manager.
