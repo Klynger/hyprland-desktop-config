@@ -21,8 +21,7 @@ window#waybar {
 
 /*----------Tooltip----------------------*/
 tooltip {
-    border-width: 1px;
-    border-style: solid;
+    border: none;
     border-radius: 24px;
 }
 
@@ -35,8 +34,7 @@ tooltip label {
     padding: 4px 6px;
     margin: 0 0 0 8px;
     border-radius: 24px;
-    border-width: 1px;
-    border-style: solid;
+    border: none;
 }
 
 #workspaces button {
@@ -69,8 +67,7 @@ tooltip label {
 #custom-power,
 #hardware {
     padding: 0 12px;
-    border-width: 1px;
-    border-style: solid;
+    border: none;
     border-radius: 24px;
 }
 
@@ -88,8 +85,7 @@ tooltip label {
 #hardware {
     padding: 0 12px;
     margin: 0 0 0 8px;
-    border-width: 1px;
-    border-style: solid;
+    border: none;
     border-radius: 24px;
 }
 
@@ -110,8 +106,7 @@ tooltip label {
 /*----------Media Group------------------*/
 #media {
     padding: 0 12px;
-    border-width: 1px;
-    border-style: solid;
+    border: none;
     border-radius: 24px;
 }
 
