@@ -43,7 +43,7 @@ There is no build step. Installation is done by running the scripts in `scripts/
 
 `symlinks.conf` declares all source→target symlink pairs using shell-expandable paths.
 `basefiles.conf` declares files that must be **copied** (not symlinked) because they are machine-specific.
-`symlinks-root.conf` declares symlinks targeting system directories (e.g. `/usr/share/sddm/themes/`) that **require sudo** — managed by `scripts/symlinks-root.sh`.
+`copies-root.conf` declares files **copied** (not symlinked) into system directories (e.g. `/usr/share/sddm/themes/`) that **require sudo** — managed by `scripts/copies-root.sh`. Copies are used instead of symlinks because system services like sddm cannot traverse the user's home directory.
 
 ---
 

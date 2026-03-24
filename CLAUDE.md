@@ -24,8 +24,8 @@ A personal Hyprland Wayland desktop dotfiles repository. No compiled code, no pa
 # Symlink bin/ scripts to $XDG_BIN_HOME (~/.local/bin)
 ./scripts/install-binaries.sh
 
-# Root-level symlinks (SDDM theme, etc.) — requires sudo
-sudo ./scripts/symlinks-root.sh --create
+# Root-level copies (SDDM theme, etc.) — requires sudo
+sudo ./scripts/copies-root.sh --create
 ```
 
 ---

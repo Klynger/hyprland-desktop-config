@@ -2,19 +2,23 @@
 set -euo pipefail
 
 # ============================================================
-# ROOT-LEVEL SYMLINKS — must be run with sudo
+# ROOT-LEVEL COPIES — must be run with sudo
 # ============================================================
-# Creates/deletes symlinks that target system directories
+# Copies config directories into system directories
 # (e.g. /usr/share/sddm/themes). These require root privileges
 # because the targets are owned by root.
 #
+# Copies are used instead of symlinks because system services
+# (like sddm) may not have permission to traverse the user's
+# home directory.
+#
 # Usage:
-#   sudo ./scripts/symlinks-root.sh --create
-#   sudo ./scripts/symlinks-root.sh --delete
+#   sudo ./scripts/copies-root.sh --create
+#   sudo ./scripts/copies-root.sh --delete
 # ============================================================
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CONFIG_FILE="$SCRIPT_DIR/../symlinks-root.conf"
+CONFIG_FILE="$SCRIPT_DIR/../copies-root.conf"
 
 . "$SCRIPT_DIR/utils.sh"
 
@@ -29,8 +33,8 @@ if [[ ! -f "$CONFIG_FILE" ]]; then
     exit 1
 fi
 
-create_symlinks() {
-    info "Creating root-level symbolic links..."
+create_copies() {
+    info "Copying root-level config files..."
 
     while IFS=: read -r source target || [[ -n "$source" ]]; do
         # Skip empty, invalid, or comment lines
@@ -46,25 +50,25 @@ create_symlinks() {
             continue
         fi
 
+        # Remove old symlink if one exists from the previous approach
         if [[ -L "$target" ]]; then
-            warning "Symbolic link already exists: $target"
-        elif [[ -e "$target" ]]; then
-            warning "Already exists (not a symlink): $target"
-        else
-            target_dir="$(dirname "$target")"
-            if [[ ! -d "$target_dir" ]]; then
-                mkdir -p "$target_dir"
-                info "Directory created: $target_dir"
-            fi
-
-            ln -s "$source" "$target"
-            success "Created symbolic link: $target → $source"
+            rm "$target"
+            info "Removed old symlink: $target"
         fi
+
+        target_dir="$(dirname "$target")"
+        if [[ ! -d "$target_dir" ]]; then
+            mkdir -p "$target_dir"
+            info "Directory created: $target_dir"
+        fi
+
+        cp -r "$source" "$target"
+        success "Copied: $source → $target"
     done < "$CONFIG_FILE"
 }
 
-delete_symlinks() {
-    info "Deleting root-level symbolic links..."
+delete_copies() {
+    info "Deleting root-level copies..."
 
     while IFS=: read -r _ target || [[ -n "$target" ]]; do
         if [[ -z "$target" || "$target" == \#* ]]; then
@@ -75,9 +79,12 @@ delete_symlinks() {
 
         if [[ -L "$target" ]]; then
             rm "$target"
+            success "Deleted symlink: $target"
+        elif [[ -e "$target" ]]; then
+            rm -r "$target"
             success "Deleted: $target"
         else
-            warning "Not a symlink or not found: $target"
+            warning "Not found: $target"
         fi
     done < "$CONFIG_FILE"
 }
@@ -90,19 +97,19 @@ configure_sddm_theme() {
 
     cat > "$conf_file" <<'CONF'
 [Theme]
-Current=material-you
+Current=
 CONF
 
-    success "SDDM theme set to material-you in $conf_file"
+    success "SDDM theme set to default in $conf_file"
 }
 
 case "${1:-}" in
     "--create")
-        create_symlinks
+        create_copies
         configure_sddm_theme
         ;;
     "--delete")
-        delete_symlinks
+        delete_copies
         ;;
     "--help")
         echo "Usage: sudo $0 [--create | --delete | --help]"
