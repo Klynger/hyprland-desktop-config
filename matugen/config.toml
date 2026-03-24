@@ -40,6 +40,11 @@ post_hook = 'hyprctl reload'
 input_path = '~/.config/matugen/templates/waybar.css'
 output_path = '~/.config/waybar/matugen/colors.css'
 
+# sddm (no post_hook — theme dir is symlinked to /usr/share via symlinks-root.sh)
+[templates.sddm]
+input_path = '~/.config/matugen/templates/sddm-main.qml'
+output_path = '~/.config/hypr/../sddm/material-you/Main.qml'
+
 # hyprlock
 [templates.hyprlock]
 input_path = '~/.config/matugen/templates/hyprlock-colors.conf'
