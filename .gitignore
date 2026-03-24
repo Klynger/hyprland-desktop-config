@@ -8,6 +8,8 @@ gtk-4.0/colors.css
 swaync/matugen/matugen-swaync.css
 wezterm/colors/matugen-theme.toml
 rofi/colors.rasi
+sddm/material-you/Main.qml
+sddm/material-you/background.jpg
 systemd/user/default.target.wants/
 systemd/user/timers.target.wants/
 

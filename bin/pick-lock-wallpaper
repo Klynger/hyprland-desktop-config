@@ -69,4 +69,10 @@ fi
 # Save lock wallpaper path for hyprlock
 echo "\$lock_wallpaper = $SELECTED" > "$LOCK_WALLPAPER_CONF"
 
+# Copy wallpaper to SDDM theme dir (SDDM can't read user home)
+SDDM_THEME_DIR="$(readlink -f "$HOME/.config/hypr/../sddm/material-you" 2>/dev/null || true)"
+if [[ -d "$SDDM_THEME_DIR" ]]; then
+    magick "$SELECTED" "$SDDM_THEME_DIR/background.jpg"
+fi
+
 notify-send "Lock wallpaper set" "$(basename "$SELECTED")" -t 3000

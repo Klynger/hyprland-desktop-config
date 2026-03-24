@@ -8,6 +8,7 @@ External packages required by this configuration.
 |---------|---------|
 | hyprland | Window manager |
 | hyprlock | Lock screen |
+| sddm | Display/login manager |
 | hypridle | Idle/sleep daemon |
 | hyprshot | Screenshots |
 | waybar | Status bar |
