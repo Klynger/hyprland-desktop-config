@@ -8,9 +8,9 @@ window {
 }
 
 button {
-    background-color: #261e18;
-    color: #f0dfd6;
-    border: 2px solid #51443b;
+    background-color: #261e19;
+    color: #f0dfd7;
+    border: 2px solid #52443c;
     border-radius: 16px;
     margin: 300px 10px;
     background-repeat: no-repeat;
@@ -22,14 +22,14 @@ button {
 }
 
 button:hover {
-    background-color: #312822;
-    border-color: #ffb780;
-    color: #ffb780;
+    background-color: #312823;
+    border-color: #ffb68a;
+    color: #ffb68a;
 }
 
 button:focus {
-    background-color: #3c332d;
-    border-color: #ffb780;
+    background-color: #3d332d;
+    border-color: #ffb68a;
 }
 
 #lock {

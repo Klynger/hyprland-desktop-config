@@ -45,7 +45,7 @@ fi
 mkdir -p "$(dirname "$LAST_WALLPAPER_FILE")"
 echo "$WALLPAPER" > "$LAST_WALLPAPER_FILE"
 
-swww img "$WALLPAPER" --transition-fps 240 --transition-type random --transition-duration 2
+awww img "$WALLPAPER" --transition-fps 240 --transition-type random --transition-duration 2
 
 # Regenerate theme colors from wallpaper and reload apps
 # matugen post_hooks handle: btop, gtk, swaync, wezterm, rofi, hyprland
