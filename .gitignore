@@ -21,3 +21,4 @@ __pycache__/
 
 # Machine-specific
 hypr/autostart.conf
+pipewire/pipewire-pulse.conf.d/custom-modules.conf
