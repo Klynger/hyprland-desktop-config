@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CONF="$HOME/.config/pipewire/pipewire-pulse.conf.d/custom-modules.conf"
+
+mapfile -t SOURCES < <(pactl list short sources | awk '$2 !~ /\.monitor$/ {print $2}')
+
+if (( ${#SOURCES[@]} == 0 )); then
+    echo "No input sources found." >&2
+    exit 1
+fi
+
+SELECTED=$(printf '%s\n' "${SOURCES[@]}" | gum choose --header "Select mic for VirtualMic:")
+[[ -z $SELECTED ]] && { echo "No source selected." >&2; exit 1; }
+
+mkdir -p "$(dirname "$CONF")"
+cat > "$CONF" <<EOF
+pulse.cmd = [
+    { cmd = "load-module" args = "module-null-sink media.class=Audio/Sink sink_name=virtmic sink_properties=device.description=VirtualMic" }
+    { cmd = "load-module" args = "module-loopback source=$SELECTED sink=virtmic latency_msec=20" }
+    { cmd = "load-module" args = "module-remap-source master=virtmic.monitor source_name=VirtualMicSource source_properties=device.description=VirtualMicSource" }
+]
+EOF
+
+systemctl --user restart pipewire-pulse
+echo "VirtualMic configured with source: $SELECTED"
