@@ -3,7 +3,7 @@ Description=Timer to change wallpapers every hour
 
 [Timer]
 OnBootSec=10sec
-OnUnitActiveSec=1h
+OnUnitActiveSec=4h
 Persistent=true
 
 [Install]
