@@ -3,7 +3,7 @@ Description=Change wallpaper using SWWW
 After=swww.service
 
 [Service]
-ExecStart=/bin/bash change-wallpaper
+ExecStart=%h/.local/bin/change-wallpaper
 
 [Install]
 WantedBy=default.target
