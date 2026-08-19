@@ -57,6 +57,7 @@ External packages required by this configuration.
 | Package | Purpose |
 |---------|---------|
 | impala | TUI WiFi configuration |
+| bluetui | TUI Bluetooth manager |
 | rfkill (util-linux) | WiFi/Bluetooth toggle |
 
 ## Python (quick-panel)

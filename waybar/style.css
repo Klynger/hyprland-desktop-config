@@ -61,6 +61,7 @@ tooltip label {
 
 /*----------Module Containers------------*/
 #pulseaudio,
+#bluetooth,
 #network,
 #custom-notification,
 #clock,
@@ -96,6 +97,11 @@ tooltip label {
     border: none;
     margin: 0;
     padding: 0 4px;
+}
+
+/*----------Bluetooth--------------------*/
+#bluetooth {
+    margin: 0 0 0 8px;
 }
 
 /*----------Network----------------------*/
