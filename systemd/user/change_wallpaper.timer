@@ -2,9 +2,10 @@
 Description=Timer to change wallpapers every hour
 
 [Timer]
-OnBootSec=10sec
+# Relative to timer activation (graphical session start), so WAYLAND_DISPLAY
+# is already imported and the awww daemon is up
+OnActiveSec=10sec
 OnUnitActiveSec=4h
-Persistent=true
 
 [Install]
-WantedBy=timers.target
+WantedBy=graphical-session.target

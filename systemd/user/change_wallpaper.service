@@ -1,9 +1,8 @@
 [Unit]
 Description=Change wallpaper using SWWW
-After=swww.service
+After=swww.service graphical-session.target
 
 [Service]
 ExecStart=%h/.local/bin/change-wallpaper
 
-[Install]
-WantedBy=default.target
+# Only triggered by change_wallpaper.timer — no [Install] section on purpose
