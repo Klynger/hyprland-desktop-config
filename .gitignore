@@ -1,6 +1,4 @@
-hypr/monitors.conf
 hypr/monitors.lua
-hypr/colors.conf
 hypr/colors.lua
 hypr/hyprlock-colors.conf
 waybar/matugen/colors.css
@@ -22,6 +20,5 @@ __pycache__/
 *.pyo
 
 # Machine-specific
-hypr/autostart.conf
 hypr/autostart.lua
 pipewire/pipewire-pulse.conf.d/custom-modules.conf

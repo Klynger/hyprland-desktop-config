@@ -34,7 +34,7 @@ There is no build step. Installation is done by running the scripts in `scripts/
 # Remove all managed symlinks
 ./scripts/symlinks.sh --delete
 
-# Copy machine-specific files (monitors.conf, autostart.conf) — run once per machine
+# Copy machine-specific files (monitors.lua, autostart.lua) — run once per machine
 ./scripts/copy-base-files.sh
 
 # Symlink all bin/ helper scripts to $XDG_BIN_HOME (~/.local/bin)
@@ -98,8 +98,8 @@ The following files are **gitignored** and must be created per machine:
 
 | File | Source template |
 |------|----------------|
-| `hypr/monitors.conf` | `hypr_copies/monitors.conf` |
-| `hypr/autostart.conf` | `hypr_copies/autostart.conf` |
+| `hypr/monitors.lua` | `hypr_copies/monitors.lua` |
+| `hypr/autostart.lua` | `hypr_copies/autostart.lua` |
 | `systemd/user/default.target.wants/` | Created by `copy-base-files.sh` |
 | `systemd/user/timers.target.wants/` | Created by `copy-base-files.sh` |
 
@@ -176,11 +176,11 @@ mapfile -t ITEMS < <(some_command)
 - Check if target already exists / is already a symlink before acting
 - Print status for every symlink processed
 
-### Hyprland Config (`.conf` files in `hypr/`)
+### Hyprland Config (Lua files in `hypr/`)
 
-- **File organization:** All sub-configs sourced from `hyprland.conf` via `source = ~/.config/hypr/file.conf`
+- **File organization:** All sub-configs loaded from `hyprland.lua` via `require("file")`
 - **Section headers:** Use `###` box-style comment blocks to delineate sections
-- **Variables:** `$camelCase` or `$lowercase` (e.g., `$mainMod`, `$terminal`, `$browser`)
+- **Variables:** `local camelCase` (e.g., `mainMod`); shared values returned as tables (see `programs.lua`)
 - **Machine-specific settings** (monitors, autostart): kept in separate files that are gitignored
 - **Window rules:** group related rules together with comments
 
@@ -220,8 +220,8 @@ See `DEPENDENCIES.md` for the full categorized list of all external dependencies
 
 ## Important Notes for Agents
 
-- **Do not hardcode usernames or home paths.** Use `$HOME` or `~` in configs. (Note: `hypr/envs.conf` currently has a hardcoded path — this is a known issue to fix.)
-- **`hypr/monitors.conf` and `hypr/autostart.conf` are gitignored** — never commit them. Edit `hypr_copies/` templates instead.
+- **Do not hardcode usernames or home paths.** Use `$HOME` or `~` in configs. In Lua config, use `os.getenv("HOME")`.
+- **`hypr/monitors.lua` and `hypr/autostart.lua` are gitignored** — never commit them. Edit `hypr_copies/` templates instead.
 - **`symlinks.conf` uses eval-expanded paths** — use `$(pwd)` and `$HOME` only, not absolute paths.
 - **All `bin/` scripts must be executable** (`chmod +x`). `install-binaries.sh` symlinks them to `$XDG_BIN_HOME`.
 - **When adding a new config directory**, add its symlink to `symlinks.conf` and document the target path.

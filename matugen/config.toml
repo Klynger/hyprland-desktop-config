@@ -35,11 +35,6 @@ input_path = '~/.config/matugen/templates/hyprland-colors.lua'
 output_path = '~/.config/hypr/colors.lua'
 post_hook = 'hyprctl reload'
 
-# hyprland (legacy hyprlang config, kept while hyprland.conf still exists)
-[templates.hyprland_conf]
-input_path = '~/.config/matugen/templates/hyprland-colors.conf'
-output_path = '~/.config/hypr/colors.conf'
-
 # waybar
 [templates.waybar]
 input_path = '~/.config/matugen/templates/waybar.css'

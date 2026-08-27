@@ -18,7 +18,7 @@ A personal Hyprland Wayland desktop dotfiles repository. No compiled code, no pa
 # Symlink all configs (idempotent, safe to re-run)
 ./scripts/symlinks.sh --create
 
-# Copy machine-specific files once per machine (monitors.conf, autostart.conf)
+# Copy machine-specific files once per machine (monitors.lua, autostart.lua)
 ./scripts/copy-base-files.sh
 
 # Symlink bin/ scripts to $XDG_BIN_HOME (~/.local/bin)
@@ -52,7 +52,7 @@ shfmt -i 4 -w bin/*
 
 ### Machine-specific files (gitignored)
 
-`hypr/monitors.conf` and `hypr/autostart.conf` are gitignored. Edit templates in `hypr_copies/` instead. Never commit the actual files.
+`hypr/monitors.lua` and `hypr/autostart.lua` are gitignored. Edit templates in `hypr_copies/` instead. Never commit the actual files.
 
 ### Hyprland config structure
 
@@ -66,7 +66,7 @@ shfmt -i 4 -w bin/*
 - `monitors.lua` / `autostart.lua` — machine-specific, gitignored; templates in `hypr_copies/`
 - `hypridle.conf` / `hyprlock.conf` — idle/lock screen (separate apps, still hyprlang)
 
-The old `.conf` files are kept as a fallback: Hyprland loads `hyprland.lua` when present, otherwise `hyprland.conf`. Lua API stubs for the LSP are wired via `.luarc.json`.
+Lua API stubs for the LSP are wired via `.luarc.json` (stubs live in `/usr/share/hypr/stubs`).
 
 ### Theming pipeline
 
