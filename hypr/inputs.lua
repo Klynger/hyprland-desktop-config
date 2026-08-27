@@ -1,0 +1,31 @@
+-------------
+--- INPUT ---
+-------------
+
+hl.config({
+    input = {
+        kb_layout = "us",
+        kb_variant = "intl",
+
+        -- Delay (ms) before key repeat starts, then repeats per second
+        repeat_delay = 200,
+        repeat_rate = 35,
+
+        -- 1 = focus follows mouse (moving mouse changes focus)
+        follow_mouse = 1,
+
+        -- -1.0 to 1.0, 0 = no modification. Negative = slower
+        sensitivity = -0.7,
+
+        touchpad = {
+            natural_scroll = false,
+        },
+    },
+})
+
+-- 3-finger horizontal swipe to switch workspace
+hl.gesture({
+    fingers = 3,
+    direction = "horizontal",
+    action = "workspace",
+})
