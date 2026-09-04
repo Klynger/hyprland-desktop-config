@@ -1,0 +1,6 @@
+[Unit]
+Description=Auto-heal flaky USB mic (re-enable hub ports, refresh PipeWire)
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/usb-mic-autoheal

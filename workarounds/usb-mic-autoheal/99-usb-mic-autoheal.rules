@@ -1,0 +1,4 @@
+# When the C-Media USB mic (0d8c:016c) disconnects, kick the
+# auto-heal service. PRODUCT is vendor/product/bcdDevice in hex
+# without leading zeros.
+ACTION=="remove", SUBSYSTEM=="usb", ENV{DEVTYPE}=="usb_device", ENV{PRODUCT}=="d8c/16c/*", RUN+="/usr/bin/systemctl start --no-block usb-mic-autoheal.service"
