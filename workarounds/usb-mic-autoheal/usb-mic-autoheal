@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ============================================================
+# USB MIC AUTO-HEAL
+# ============================================================
+# The C-Media USB mic (0d8c:016c) has a marginal cable: moving
+# it corrupts the USB link (EPROTO -71). On kernels >= 7.2 the
+# error storm makes the kernel disable ALL ports of the rear
+# Genesys hub until they are manually re-enabled, and every
+# reconnect leaves ghost PipeWire nodes that loop junk audio.
+#
+# This script (run by udev via usb-mic-autoheal.service when
+# the mic disconnects):
+#   1. re-enables any kernel-disabled ports on the hub
+#   2. waits for the mic to re-enumerate
+#   3. restarts the user's PipeWire stack to purge ghost nodes
+#
+# Remove this workaround once the mic cable is repaired.
+# ============================================================
+
+# Rear-panel Genesys Logic hub (05e3:0608) the mic lives behind
+HUB="3-3"
+
+# Minimum seconds between PipeWire restarts (disconnect storms
+# fire this script many times in a row)
+DEBOUNCE=30
+
+STAMP="/run/usb-mic-autoheal.last"
+
+log() {
+    logger -t usb-mic-autoheal "$1"
+}
+
+mic_present() {
+    local dev
+    for dev in /sys/bus/usb/devices/*/; do
+        [[ -f "$dev/idVendor" && -f "$dev/idProduct" ]] || continue
+        if [[ "$(<"$dev/idVendor")" == "0d8c" && "$(<"$dev/idProduct")" == "016c" ]]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# Give the kernel a chance to re-enumerate the mic on its own
+sleep 3
+
+# Re-enable any hub ports the kernel latched off after the error storm
+healed=0
+for port in /sys/bus/usb/devices/$HUB/$HUB:1.0/$HUB-port*/disable; do
+    [[ -f "$port" ]] || continue
+    if [[ "$(<"$port")" == "1" ]]; then
+        echo 0 >"$port"
+        healed=1
+    fi
+done
+if [[ "$healed" == "1" ]]; then
+    log "re-enabled kernel-disabled ports on hub $HUB"
+fi
+
+# Wait for the mic to come back
+for _ in {1..10}; do
+    mic_present && break
+    sleep 1
+done
+
+if ! mic_present; then
+    log "mic did not re-enumerate; nothing more to do"
+    exit 0
+fi
+
+# Debounce the audio-stack restart during disconnect storms
+now="$(date +%s)"
+if [[ -f "$STAMP" ]] && ((now - $(<"$STAMP") < DEBOUNCE)); then
+    exit 0
+fi
+echo "$now" >"$STAMP"
+
+# Restart the logged-in user's PipeWire to purge ghost nodes.
+# Ghost nodes are dead copies of the mic that apps (Discord)
+# keep capturing from — the "tic tic tic" / junk-loop sound.
+read -r uid user < <(loginctl list-users --no-legend | awk '$1 >= 1000 { print $1, $2; exit }')
+if [[ -z "${user:-}" ]]; then
+    log "no logged-in user found; skipping PipeWire restart"
+    exit 0
+fi
+
+runuser -u "$user" -- env "XDG_RUNTIME_DIR=/run/user/$uid" \
+    systemctl --user restart wireplumber pipewire pipewire-pulse
+log "restarted PipeWire stack for $user"
+
+runuser -u "$user" -- env "XDG_RUNTIME_DIR=/run/user/$uid" \
+    "DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/$uid/bus" \
+    notify-send -i audio-input-microphone "USB mic auto-heal" \
+    "Mic recovered and audio stack refreshed. Restart Discord if it lost its devices." || true
